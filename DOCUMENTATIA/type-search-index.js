@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.example","l":"Course"},{"p":"org.example","l":"Faculty"},{"p":"org.example","l":"Student"},{"p":"org.example","l":"University"},{"p":"org.example","l":"UniversityJsonGenerator"},{"p":"org.example","l":"UniversityJsonReader"}];updateSearchResults();

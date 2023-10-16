@@ -1,13 +1,43 @@
 package org.example;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * The {@code UniversityJsonGenerator} class generates a sample University structure and converts it to JSON format.
+ */
 public class UniversityJsonGenerator {
+
+    /**
+     * The main method creates a sample University structure, converts it to JSON, and saves it to a file.
+     *
+     * @param args the command-line arguments (not used in this application).
+     */
     public static void main(String[] args) {
         // Creating an example University structure
+        University university = createSampleUniversity();
+
+        // Convert the University object to JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String json = objectMapper.writeValueAsString(university);
+            // Save JSON data to a file
+            saveJsonToFile("university.json", json);
+            System.out.println("JSON data saved to university.json");
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Creates and returns a sample University structure with faculties, courses, and students.
+     *
+     * @return a sample University structure.
+     */
+    private static University createSampleUniversity() {
         University university = new University();
 
         Faculty itFaculty = new Faculty("1", "Факультет информационных технологий");
@@ -29,18 +59,15 @@ public class UniversityJsonGenerator {
         student2.addCourse("201");
         university.addStudent(student2);
 
-        // Convert the University object to JSON
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            String json = objectMapper.writeValueAsString(university);
-            // Save JSON data to a file
-            saveJsonToFile("university.json", json);
-            System.out.println("JSON data saved to university.json");
-            //System.out.println(json);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        return university;
     }
+
+    /**
+     * Saves the given JSON data to a file with the specified filename.
+     *
+     * @param fileName the name of the file to save the JSON data.
+     * @param json     the JSON data to be saved.
+     */
     private static void saveJsonToFile(String fileName, String json) {
         try (FileWriter fileWriter = new FileWriter(fileName)) {
             fileWriter.write(json);
